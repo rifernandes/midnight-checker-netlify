@@ -11,7 +11,7 @@ async function checkAll() {
   const lines = input.split('\n').filter(l => l.trim());
   for (const card of lines) {
     await delay(5000);
-    const status = Math.random() < 0.0002 ? 'live' : 'dead';
+    const status = Math.random() < 0.2 ? 'live' : 'dead';
     const msg = status === 'live'
       ? `${card} => LIVE - Paid USD 0.60`
       : `${card} => Die`;
