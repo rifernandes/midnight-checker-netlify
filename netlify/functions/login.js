@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 // Defina no Netlify UI como variável de ambiente
 // e
 const SECRET = process.env.JWT_SECRET;
-const USER = 'novousuario';
-const PASS = 'cliente32.li.com';
+const USER = 'novoucliente';
+const PASS = 'cliente32commes+';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
