@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Login - MidNight CHK</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/style.css" />
+  <meta charset="UTF-8">
+  <title>Login – MidNight CHK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body class="login-page">
   <div class="login-container">
     <h2>Login</h2>
     <p id="error" class="error"></p>
     <form id="loginForm">
-      <!-- adicione name para facilitar debug futuro -->
-      <input type="text" id="user" name="username" placeholder="Usuário" required />
-      <input type="password" id="pass" name="password" placeholder="Senha" required />
+      <input type="text" id="user" name="username" placeholder="Usuário" required>
+      <input type="password" id="pass" name="password" placeholder="Senha" required>
       <button type="submit">Entrar</button>
     </form>
   </div>
+
   <script>
-    const form = document.getElementById('loginForm');
-    // REFERÊNCIAS AOS INPUTS
+    const form      = document.getElementById('loginForm');
     const userInput = document.getElementById('user');
     const passInput = document.getElementById('pass');
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
-      // MONTA O PAYLOAD CERTINHO
       const payload = {
         username: userInput.value.trim(),
         password: passInput.value.trim()
       };
+      console.log('Enviando →', payload);
 
       const res = await fetch('/.netlify/functions/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
