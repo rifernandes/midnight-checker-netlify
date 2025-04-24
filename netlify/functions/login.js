@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT_SECRET;
 console.log('🐛 SECRET →', SECRET);
 
-const USER   = 'novoucliente';
+const USER   = 'novocliente';
 const PASS   = 'cliente32commes+';
 
 exports.handler = async (event) => {
