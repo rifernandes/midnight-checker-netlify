@@ -9,11 +9,11 @@
 <body>
   <div class="user-label" id="userLabel"></div>
   <div class="header">
-    <h1>CHECKER GG </h1>
+    <h1>CHECKER GG</h1>
   </div>
 
   <div class="input-container">
-    <textarea id="input" placeholder="xxxxxxxxxxxxxxxx|xx/xxxx|xxx"></textarea>
+    <textarea id="input" placeholder="jogue suas geradas assim: xxxxxxxxxxxxxxxx|xx/xxxx|xxx"></textarea>
     <div class="action-buttons">
       <button onclick="checkAll()">Check</button>
       <button onclick="clearInput()">Clear</button>
@@ -27,13 +27,13 @@
   </div>
   <footer>
     <div class="left-footer"></div>
-    <div class="center-footer">Feito por <span>OttoCarder</span></div>
+    <div class="center-footer">Feito por <span>@Temp</span></div>
   </footer>
 
   <script src="/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
   <script>
-    // Proteção client-side
+    //client-side
     const token = localStorage.getItem('midnight_token');
     if (!token) window.location = '/login.html';
     try {
