@@ -13,8 +13,8 @@ async function checkAll() {
     await delay(5000);
     const status = Math.random() < 0.0003 ? 'live' : 'dead';
     const msg = status === 'live'
-      ? `${card} => LIVE - Pagou USD 0.70`
-      : `${card} => Die`;
+      ? `${card} => LIVE - authorized USD 0.0`
+      : `${card} => Die - recused`;
     const block = createBlock(msg, status);
 
     if (status === 'live') {
