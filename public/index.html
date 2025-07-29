@@ -3,363 +3,67 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CHECKER CC</title>
+    <title>Login - CHECKER</title>
+    <link rel="stylesheet" href="/style.css" />
     <style>
-        /* Reset e Configurações Globais */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+        /* Estilos adicionais para centralizar o formulário de login */
+        body {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            padding-top: 2rem;
-        }
-
-        /* Container Principal */
-        .container {
-            width: 100%;
-            max-width: 900px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Label do Usuário */
-        .user-label {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-weight: bold;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-
-        /* Cabeçalho */
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #007BFF;
-            padding-bottom: 1rem;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #007BFF;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        }
-
-        /* Área de Input */
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            background: #1e1e1e;
-            color: #f0f0f5;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 1rem;
-            resize: vertical;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        textarea::placeholder {
-            color: #666;
-        }
-
-        textarea:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        button {
-            padding: 12px 30px;
-            background: #007BFF;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        
-        button.clear-btn {
-            background-color: #6c757d;
-        }
-
-        button.clear-btn:hover {
-            background-color: #5a6268;
-        }
-
-        /* Área de Resultados */
-        .results-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .result-box {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .result-box h3 {
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-        
-        .result-box.live h3 {
-            color: #28a745;
-            border-bottom: 1px solid #28a745;
-        }
-
-        .result-box.dead h3 {
-            color: #dc3545;
-            border-bottom: 1px solid #dc3545;
-        }
-        
-        .results-list {
-            height: 300px;
-            overflow-y: auto;
-            padding-right: 10px; /* Espaço para a barra de rolagem */
-        }
-        
-        /* Custom Scrollbar */
-        .results-list::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .results-list::-webkit-scrollbar-track {
-            background: #2a2a2a;
-            border-radius: 4px;
-        }
-
-        .results-list::-webkit-scrollbar-thumb {
-            background: #555;
-            border-radius: 4px;
-        }
-
-        .results-list::-webkit-scrollbar-thumb:hover {
-            background: #777;
-        }
-
-        .result-item {
-            padding: 8px 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            word-wrap: break-word;
-        }
-        
-        .result-item.live {
-            background-color: rgba(40, 167, 69, 0.1);
-            border-left: 3px solid #28a745;
-        }
-        
-        .result-item.live:hover {
-            background-color: rgba(40, 167, 69, 0.2);
-        }
-
-        .result-item.dead {
-            background-color: rgba(220, 53, 69, 0.1);
-            border-left: 3px solid #dc3545;
-        }
-        
-        .result-item.dead:hover {
-            background-color: rgba(220, 53, 69, 0.2);
-        }
-        
-        /* Footer */
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        footer span {
-            color: #007BFF;
-            font-weight: bold;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
+    <div class="login-container">
+        <h2>Acessar o Checker</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Usuário" required />
+            <input type="password" id="password" placeholder="Senha" required />
+            <button type="submit">Entrar</button>
+        </form>
+        <p id="error-message" class="error" style="display: none;"></p>
+    </div>
 
-    <div class="user-label" id="userLabel"></div>
-
-    <main class="container">
-        <div class="header">
-            <h1>CHECKER CC</h1>
-        </div>
-
-        <div class="input-container">
-            <textarea id="input" placeholder="Cole suas listas aqui, uma por linha: xxxxxxxxxxxxxxxx|xx|xxxx|xxx"></textarea>
-            <div class="action-buttons">
-                <button onclick="checkAll()">Check</button>
-                <button class="clear-btn" onclick="clearAll()">Limpar</button>
-            </div>
-        </div>
-      
-        <div class="results-container">
-            <div class="result-box live">
-                <h3>✅ Aprovadas <span id="live-count">(0)</span></h3>
-                <div id="live-results" class="results-list"></div>
-            </div>
-            <div class="result-box dead">
-                <h3>❌ Reprovadas <span id="dead-count">(0)</span></h3>
-                <div id="dead-results" class="results-list"></div>
-            </div>
-        </div>
-      
-        <footer>
-            Feito por <span>@S3V3NR777</span> | Design aprimorado por Gemini
-        </footer>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script>
-        // Lógica de autenticação do usuário (mantida como no original)
-        try {
-            const token = localStorage.getItem('midnight_token');
-            if (!token) {
-              // Descomente as linhas abaixo se tiver uma página de login
-              // window.location = '/login.html';
-            } else {
-                const { sub } = jwt_decode(token);
-                document.getElementById('userLabel').textContent = `Olá, ${sub}`;
+        // Se o usuário já tiver um token válido, redireciona para o checker
+        if (localStorage.getItem('midnight_token')) {
+            window.location.href = '/checker.html';
+        }
+    
+        const form = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            errorMessage.style.display = 'none';
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/.netlify/functions/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('midnight_token', data.token);
+                    window.location.href = '/checker.html'; // Redireciona para o checker
+                } else {
+                    const errorText = await response.text();
+                    errorMessage.textContent = errorText || 'Credenciais inválidas.';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                errorMessage.textContent = 'Erro de conexão. Tente novamente.';
+                errorMessage.style.display = 'block';
             }
-        } catch (e) {
-            localStorage.removeItem('midnight_token');
-            // Descomente as linhas abaixo se tiver uma página de login
-            // window.location = '/login.html';
-            console.error("Erro ao decodificar token:", e);
-        }
-
-        // --- Lógica do Checker ---
-        
-        const inputArea = document.getElementById('input');
-        
-        const liveResultsContainer = document.getElementById('live-results');
-        const deadResultsContainer = document.getElementById('dead-results');
-        
-        const liveCountElement = document.getElementById('live-count');
-        const deadCountElement = document.getElementById('dead-count');
-
-        let liveCount = 0;
-        let deadCount = 0;
-
-        // Função para simular a verificação (substitua pela sua lógica de API)
-        function checkAll() {
-            const lines = inputArea.value.split('\n').filter(line => line.trim() !== '');
-            if (lines.length === 0) {
-                alert("Por favor, insira alguma lista para verificar.");
-                return;
-            }
-            
-            clearResults();
-
-            // *** AVISO: A lógica abaixo é uma SIMULAÇÃO. ***
-            // Você deve substituir isso pela sua chamada de API real.
-            lines.forEach((line, index) => {
-                // Simula um atraso de rede para cada verificação
-                setTimeout(() => {
-                    const isLive = Math.random() > 0.4; // 60% de chance de ser aprovada (para demonstração)
-                    
-                    if (isLive) {
-                        liveCount++;
-                        liveCountElement.textContent = `(${liveCount})`;
-                        addResult(liveResultsContainer, line, 'live');
-                    } else {
-                        deadCount++;
-                        deadCountElement.textContent = `(${deadCount})`;
-                        addResult(deadResultsContainer, line, 'dead');
-                    }
-                }, index * 100); // Adiciona um pequeno delay entre cada checagem
-            });
-        }
-
-        function addResult(container, text, type) {
-            const resultItem = document.createElement('div');
-            resultItem.className = `result-item ${type}`;
-            resultItem.textContent = text;
-            
-            // Adiciona funcionalidade de copiar ao clicar
-            resultItem.onclick = () => {
-                navigator.clipboard.writeText(text).then(() => {
-                    // Feedback visual temporário
-                    const originalColor = resultItem.style.backgroundColor;
-                    resultItem.style.backgroundColor = '#007BFF';
-                    setTimeout(() => {
-                        resultItem.style.backgroundColor = originalColor;
-                    }, 200);
-                }).catch(err => console.error('Falha ao copiar:', err));
-            };
-            
-            container.appendChild(resultItem);
-            container.scrollTop = container.scrollHeight; // Rola para o final
-        }
-
-        function clearResults() {
-            liveResultsContainer.innerHTML = '';
-            deadResultsContainer.innerHTML = '';
-            liveCount = 0;
-            deadCount = 0;
-            liveCountElement.textContent = `(${liveCount})`;
-            deadCountElement.textContent = `(${deadCount})`;
-        }
-      
-        function clearAll() {
-            inputArea.value = '';
-            clearResults();
-        }
-
+        });
     </script>
 </body>
 </html>
